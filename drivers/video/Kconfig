@@ -2238,6 +2238,27 @@ config FB_DA8XX
 	  found on DA8xx/OMAP-L1xx SoCs.
 	  If unsure, say N.
 
+config FB_DA8XX_UBOOT_CONFIG
+	bool "LCD Frame Buffer Configured by U-boot"
+	depends on FB && FB_DA8XX
+	---help---
+	  select this if you are sure that LCD controller is already been configured by U-boot
+	  If unsure, say N.
+
+config VIDEO_DA8XX_FB_MEMSIZE
+	int "DA8xx/OMAP-L1xx Framebuffer memory size"
+	depends on FB && FB_DA8XX && FB_DA8XX_UBOOT_CONFIG
+	default 4
+	---help---
+	  Frame Buffer Memory Size in MBytes
+
+config VIDEO_DA8XX_FB_MEMADDR
+	int "DA8xx/OMAP-L1xx Framebuffer memory baseaddress"
+	depends on FB && FB_DA8XX && FB_DA8XX_UBOOT_CONFIG
+	default 252
+	---help---
+	  Frame Buffer Memory BaseAddress in MBytes
+
 config FB_VIRTUAL
 	tristate "Virtual Frame Buffer support (ONLY FOR TESTING!)"
 	depends on FB

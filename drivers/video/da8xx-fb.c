@@ -138,6 +138,11 @@
 #define	LCD_CLK_WIDTH	8
 #define	LCD_CLK_MIN_DIV	2
 
+#if defined(CONFIG_VIDEO_DA8XX_FB_MEMSIZE) && defined(CONFIG_VIDEO_DA8XX_FB_MEMADDR)
+static u_long videomemorysize = (CONFIG_VIDEO_DA8XX_FB_MEMSIZE*1024*1024);
+static u_long videomem_offset = ((CONFIG_VIDEO_DA8XX_FB_MEMADDR*1024*1024)+0x80000000);
+#endif
+
 static void __iomem *da8xx_fb_reg_base;
 static struct resource *lcdc_regs;
 static unsigned int lcd_revision;
@@ -1453,7 +1458,9 @@ static int fb_probe(struct platform_device *device)
 	fb_videomode_to_var(&da8xx_fb_var, lcdc_info);
 	par->cfg = *lcd_cfg;
 
+#if !defined(CONFIG_VIDEO_DA8XX_FB_MEMSIZE) && !defined(CONFIG_VIDEO_DA8XX_FB_MEMADDR)
 	da8xx_fb_lcd_reset();
+#endif
 
 #ifdef	CONFIG_COMMON_CLK
 	/* set sane divisor value to begin along with the mode */
@@ -1480,10 +1487,15 @@ static int fb_probe(struct platform_device *device)
 	par->vram_size = roundup(par->vram_size/8, ulcm);
 	par->vram_size = par->vram_size * LCD_NUM_BUFFERS;
 
+#if defined(CONFIG_VIDEO_DA8XX_FB_MEMSIZE) && defined(CONFIG_VIDEO_DA8XX_FB_MEMADDR)
+	par->vram_virt = ioremap(videomem_offset,videomemorysize);
+	par->vram_phys = videomem_offset;
+#else
 	par->vram_virt = dma_alloc_coherent(NULL,
 					    par->vram_size,
 					    (resource_size_t *) &par->vram_phys,
 					    GFP_KERNEL | GFP_DMA);
+#endif
 	if (!par->vram_virt) {
 		dev_err(&device->dev,
 			"GLCD: kmalloc for frame buffer failed\n");
@@ -1513,12 +1525,6 @@ static int fb_probe(struct platform_device *device)
 		goto err_release_fb_mem;
 	}
 	memset(par->v_palette_base, 0, PALETTE_SIZE);
-
-	par->irq = platform_get_irq(device, 0);
-	if (par->irq < 0) {
-		ret = -ENOENT;
-		goto err_release_pl_mem;
-	}
 
 	da8xx_fb_var.grayscale =
 	    lcd_cfg->panel_shade == MONOCHROME ? 1 : 0;
@@ -1565,6 +1571,12 @@ static int fb_probe(struct platform_device *device)
 		goto err_cpu_freq;
 	}
 #endif
+
+	par->irq = platform_get_irq(device, 0);
+	if (par->irq < 0) {
+		ret = -ENOENT;
+		goto err_release_pl_mem;
+	}
 
 	if (lcd_revision == LCD_VERSION_1)
 		lcdc_irq_handler = lcdc_irq_handler_rev01;
