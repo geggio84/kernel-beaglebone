@@ -195,7 +195,7 @@
                 };
 
                 /* Settings for NHD-4.3-ATXI#-T-1 / LCD4 cape: */
-                panel {
+                /*panel {
                         compatible = "tilcdc,panel";
                         pinctrl-names = "default";
                         pinctrl-0 = <&lcd_pins>;
@@ -237,7 +237,7 @@
                         interrupt-parent = <&intc>;
                         interrupts = <36>;
                         ti,hwmods = "lcdc";
-                };
+                };*/
         };
 
         bone_capemgr {
@@ -707,4 +707,24 @@
         interface_type = <1>;
         power = <250>;
         status = "okay";
+};
+
+&lcdc {
+	status = "okay";
+
+	display-timings {
+		480x272p57 {
+			clock-frequency = <9000000>;
+			hactive = <480>;
+			vactive = <272>;
+			hfront-porch = <9>;
+			hback-porch = <44>;
+			hsync-len = <5>;
+			vback-porch = <13>;
+			vfront-porch = <4>;
+			vsync-len = <10>;
+			hsync-active = <0>;
+			vsync-active = <0>;
+		};
+	};
 };
