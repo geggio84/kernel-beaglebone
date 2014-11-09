@@ -581,17 +581,24 @@
 
                 interrupt-parent = <&gpio2>;
                 interrupts = <29>;
-                //pendown-gpio = <&gpio1 8 0>;
-                //pendown-gpio = <&gpio2 29 0>;
+                pendown-gpio = <&gpio2 29 0>;
+                ti,pendown-gpio-debounce = <50>;
 
-        vcc-supply = <&vin>;
+                vcc-supply = <&vin>;
                 ti,x-min = <0>;
-                ti,x-max = <8000>;
+                ti,x-max = <4000>;
                 ti,y-min = <0>;
-                ti,y-max = <4800>;
-                ti,x-plate-ohms = <40>;
-                ti,y-plate-ohms = <40>;
-                ti,pressure-max = <255>;
+                ti,y-max = <4000>;
+                ti,x-plate-ohms = <750>;
+                ti,y-plate-ohms = <230>;
+                ti,pressure-min = <1000>;
+                ti,pressure-max = <15000>;
+                ti,settle-delay-usec = <150>;
+                ti,debounce-max = <5>;
+                ti,debounce-tol = <65535>;
+                ti,vref-delay-usecs = <450>;
+
+                linux,wakeup;
         };
 };
 
