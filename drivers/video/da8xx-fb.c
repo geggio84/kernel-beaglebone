@@ -984,22 +984,22 @@ static int fb_check_var(struct fb_var_screeninfo *var,
 		var->nonstd = 0;
 		break;
 	case 24:
-		var->red.offset = 16;
+		var->red.offset = 0;
 		var->red.length = 8;
 		var->green.offset = 8;
 		var->green.length = 8;
-		var->blue.offset = 0;
+		var->blue.offset = 16;
 		var->blue.length = 8;
 		var->nonstd = 0;
 		break;
 	case 32:
 		var->transp.offset = 24;
 		var->transp.length = 8;
-		var->red.offset = 16;
+		var->red.offset = 0;
 		var->red.length = 8;
 		var->green.offset = 8;
 		var->green.length = 8;
-		var->blue.offset = 0;
+		var->blue.offset = 16;
 		var->blue.length = 8;
 		var->nonstd = 0;
 		break;
@@ -1259,10 +1259,10 @@ static int da8xxfb_set_par(struct fb_info *info)
 	int ret;
 	bool raster = da8xx_fb_is_raster_enabled();
 
-	if (raster)
+	/*if (raster)
 		lcd_disable_raster(true);
 	else
-		lcd_disable_raster(false);
+		lcd_disable_raster(false);*/
 
 	fb_var_to_videomode(&par->mode, &info->var);
 
@@ -1289,8 +1289,8 @@ static int da8xxfb_set_par(struct fb_info *info)
 	lcdc_write(par->dma_start, LCD_DMA_FRM_BUF_BASE_ADDR_1_REG);
 	lcdc_write(par->dma_end, LCD_DMA_FRM_BUF_CEILING_ADDR_1_REG);
 
-	if (raster)
-		lcd_enable_raster();
+	/*if (raster)
+		lcd_enable_raster();*/
 
 	return 0;
 }
