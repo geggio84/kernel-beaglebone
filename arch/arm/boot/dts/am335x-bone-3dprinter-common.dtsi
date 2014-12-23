@@ -33,6 +33,8 @@
                                 0x58 0x17       /* gpmc_a6.gpio1_22, OUTPUT_PULLUP | MODE7 */
                                 0x5c 0x7        /* gpmc_a7.gpio1_23, OUTPUT | MODE7 */
                                 0x60 0x17       /* gpmc_a8.gpio1_24, OUTPUT_PULLUP | MODE7 */
+                                /*0x9C 0x07*/       /* gpmc_be0n_cle.gpio2_5, OUTPUT | MODE7, EXT_GPIO0 */
+                                0x90 0x07       /* gpmc_advn_ale-gpio2_2, OUTPUT | MODE7, EXT_GPIO0 */
                         >;
                 };
                 stepper_pins: pinmux_stepper_pins {
@@ -63,10 +65,9 @@
                 };
                 frontpanel_pins: pinmux_frontpanel_pins {
                         pinctrl-single,pins = <
-                                0x70 0x37       /* gpmc_wait0.gpio0_30, INPUT_PULLUP | MODE7, ENC_SW */
-                                0x40 0x37       /* gpmc_a0.gpio1_16, INPUT_PULLUP | MODE7, ENC_A */
-                                0x1B4 0x37      /* xdma_event_intr1.gpio0_20, INPUT_PULLUP | MODE7, ENC_B */
-                                /*0x   0x*/       /* , OUTPUT | MODE7, EXT_GPIO0 */
+                                0x70 0x3F       /* gpmc_wait0.gpio0_30, INPUT_PULLUP | MODE7, ENC_SW */
+                                0x40 0x3F       /* gpmc_a0.gpio1_16, INPUT_PULLUP | MODE7, ENC_A */
+                                0x1B4 0x3F      /* xdma_event_intr1.gpio0_20, INPUT_PULLUP | MODE7, ENC_B */
                         >;
                 };
                 i2c0_pins: pinmux_i2c0_pins {
@@ -175,6 +176,13 @@
                                 gpios = <&gpio2 24 0>;
                                 default-state = "off";
                                 linux,default-trigger = "mmc1";
+                        };
+
+                        ledPWR {
+                                label = "beaglebone:blue:ledPWR";
+                                //gpios = <&gpio3 5 0>;
+                                gpios = <&gpio3 2 0>;
+                                default-state = "on";
                         };
                 };
 
