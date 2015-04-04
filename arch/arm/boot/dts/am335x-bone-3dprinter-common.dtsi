@@ -25,49 +25,48 @@
 
         am33xx_pinmux: pinmux@44e10800 {
                 pinctrl-names = "default";
-                pinctrl-0 = <&userled_pins &stepper_pins &endstop_pins &frontpanel_pins>;
+                pinctrl-0 = <&stepper_pins &endstop_pins &frontpanel_button_pin &frontpanel_encoder_pins>;
 
                 userled_pins: pinmux_userled_pins {
                         pinctrl-single,pins = <
-                                0x54 0x7        /* gpmc_a5.gpio1_21, OUTPUT | MODE7 */
-                                0x58 0x17       /* gpmc_a6.gpio1_22, OUTPUT_PULLUP | MODE7 */
-                                0x5c 0x7        /* gpmc_a7.gpio1_23, OUTPUT | MODE7 */
-                                0x60 0x17       /* gpmc_a8.gpio1_24, OUTPUT_PULLUP | MODE7 */
-                                /*0x9C 0x07*/       /* gpmc_be0n_cle.gpio2_5, OUTPUT | MODE7, EXT_GPIO0 */
-                                0x90 0x07       /* gpmc_advn_ale-gpio2_2, OUTPUT | MODE7, EXT_GPIO0 */
+                                0x054 0x07        /* gpmc_a5.gpio1_21, OUTPUT | MODE7 */
+                                0x058 0x17       /* gpmc_a6.gpio1_22, OUTPUT_PULLUP | MODE7 */
+                                0x05c 0x07        /* gpmc_a7.gpio1_23, OUTPUT | MODE7 */
+                                0x060 0x17       /* gpmc_a8.gpio1_24, OUTPUT_PULLUP | MODE7 */
+                                0x040 0x07       /* gpmc_a0.gpio1_16, OUTPUT_PULLDOWN | MODE7, EXT_GPIO */
                         >;
                 };
                 stepper_pins: pinmux_stepper_pins {
                         pinctrl-single,pins = <
-                                0x0C 0x17       /* gpmc_ad3.gpio1_3, OUTPUT_PULLUP | MODE7, Enable X */
-                                0x98 0x07       /* gpmc_wen.gpio2_4, OUTPUT_PULLDOWN | MODE7, DIR X */
-                                0x2C 0x07       /* gpmc_ad11.gpio0_27, OUTPUT_PULLDOWN | MODE7, STEP X */
-                                0x1C 0x17       /* gpmc_ad7.gpio1_7, OUTPUT_PULLUP | MODE7, Enable Y */
-                                0x20 0x07       /* gpmc_ad8.gpio0_22, OUTPUT_PULLDOWN | MODE7, DIR Y */
-                                0x30 0x07       /* gpmc_ad12.gpio1_12, OUTPUT_PULLDOWN | MODE7, STEP Y */
-                                0x08 0x17       /* gpmc_ad2.gpio1_2, OUTPUT_PULLUP | MODE7, Enable Z */
-                                0x28 0x07       /* gpmc_ad10.gpio0_26, OUTPUT_PULLDOWN | MODE7, DIR Z */
-                                0x24 0x07       /* gpmc_ad9.gpio0_23, OUTPUT_PULLDOWN | MODE7, STEP Z */
-                                0x18 0x17       /* gpmc_ad6.gpio1_6, OUTPUT_PULLUP | MODE7, Enable E */
-                                0x3C 0x07       /* gpmc_ad15.gpio1_15, OUTPUT_PULLDOWN | MODE7, DIR E */
-                                0x78 0x07       /* gpmc_be1n.gpio1_28, OUTPUT_PULLDOWN | MODE7, STEP E */
+                                0x034 0x07      /* gpmc_ad13.gpio1_13, OUTPUT_PULLDOWN | MODE7, DIR X */
+                                0x030 0x07      /* gpmc_ad12.gpio1_12, OUTPUT_PULLDOWN | MODE7, STEP X */
+                                0x1A8 0x07      /* mcasp0_axr1.gpio3_20, OUTPUT_PULLDOWN | MODE7, DIR Y */
+                                0x1A0 0x07      /* mcasp0_aclkr.gpio3_18, OUTPUT_PULLDOWN | MODE7, STEP Y */
+                                0x024 0x07      /* gpmc_ad9.gpio0_23, OUTPUT_PULLDOWN | MODE7, DIR Z */
+                                0x028 0x07      /* gpmc_ad10.gpio0_26, OUTPUT_PULLDOWN | MODE7, STEP Z */
+                                0x03C 0x07      /* gpmc_ad15.gpio1_15, OUTPUT_PULLDOWN | MODE7, DIR E */
+                                0x038 0x07      /* gpmc_ad14.gpio1_14, OUTPUT_PULLDOWN | MODE7, STEP E */
+                                0x08C 0x37      /* gpmc_clk.gpio2_1, INPUT_PULLUP | MODE7, FLAG */
                         >;
                 };
                 endstop_pins: pinmux_endstop_pins {
                         pinctrl-single,pins = <
-                                0x1AC 0x0F      /* mcasp0_ahclkx.gpio3_21, OUTPUT | MODE7, END X1 */
-                                0x154 0x0F      /* spi0_d0.gpio0_3, OUTPUT | MODE7, END X2 */
-                                0x44 0x0F       /* gpmc_a1.gpio1_17, OUTPUT | MODE7, END Y1 */
-                                0x4C 0x0F       /* gpmc_a3.gpio1_19, OUTPUT | MODE7, END Y2 */
-                                0x74 0x0F       /* gpmc_wpn.gpio0_31, OUTPUT | MODE7, END Z1 */
-                                0x150 0x0F      /* spi0_sclk.gpio0_2, OUTPUT | MODE7, END Z2 */
+                                0x090 0x37      /* gpmc_advn_ale.gpio2_2, INPUT_PULLUP | MODE7, END X1 */
+                                0x094 0x37      /* gpmc_oen_ren.gpio2_3, INPUT_PULLUP | MODE7, END X2 */
+                                0x09C 0x37      /* gpmc_ben0_cle.gpio2_5, INPUT_PULLUP | MODE7, END Y1 */
+                                0x098 0x37      /* gpmc_wen.gpio2_4, INPUT_PULLUP | MODE7, END Y2 */
+                                0x04C 0x37      /* gpmc_a3.gpio1_19, INPUT_PULLUP | MODE7, END Z1 */
                         >;
                 };
-                frontpanel_pins: pinmux_frontpanel_pins {
+                frontpanel_button_pin: pinmux_frontpanel_button_pin {
                         pinctrl-single,pins = <
-                                0x70 0x3F       /* gpmc_wait0.gpio0_30, INPUT_PULLUP | MODE7, ENC_SW */
-                                0x40 0x3F       /* gpmc_a0.gpio1_16, INPUT_PULLUP | MODE7, ENC_A */
-                                0x1B4 0x3F      /* xdma_event_intr1.gpio0_20, INPUT_PULLUP | MODE7, ENC_B */
+                                0x070 0x37       /* gpmc_wait0.gpio0_30, INPUT_PULLUP | MODE7, ENC_SW */
+                        >;
+                };
+                frontpanel_encoder_pins: pinmux_frontpanel_encoder_pins {
+                        pinctrl-single,pins = <
+                                0x078 0x37      /* gpmc_ben1.gpio1_28, INPUT_PULLUP | MODE7, ENC_A */
+                                0x074 0x37       /* gpmc_wpn.gpio0_31, INPUT_PULLUP | MODE7, ENC_B */
                         >;
                 };
                 i2c0_pins: pinmux_i2c0_pins {
@@ -76,12 +75,10 @@
                                 0x18c 0x70      /* i2c0_scl, SLEWCTRL_SLOW | INPUT_PULLUP | MODE0 */
                         >;
                 };
-                uart2_pins: pinmux_uart2_pins {
+                i2c1_pins: pinmux_i2c1_pins {
                         pinctrl-single,pins = <
-                                0x180 0x30      /* uart1_rx, SLEWCTRL_SLOW | INPUT_PULLUP | MODE0 */
-                                0x184 0x30      /* uart1_tx, SLEWCTRL_SLOW | INPUT_PULLUP | MODE0 */
-                                0x178 0x70      /* uart1_ctsn, SLEWCTRL_SLOW | INPUT_PULLUP | MODE0 */
-                                0x17c 0x70      /* uart1_rtsn, SLEWCTRL_SLOW | INPUT_PULLUP | MODE0 */
+                                0x184 0x73      /* uart1_txd.i2c1_scl, SLEWCTRL_SLOW | INPUT_PULLUP | MODE3, I2C1_SCL */
+                                0x180 0x73      /* uart1_rxd.i2c1_sda, SLEWCTRL_SLOW | INPUT_PULLUP | MODE3, I2C1_SDA */
                         >;
                 };
                 mmc1_pins: pinmux_mmc1_pins {
@@ -91,47 +88,67 @@
                 };
                 lcd_pins: pinmux_lcd_pins {
                         pinctrl-single,pins = <
-                                0xa0 0x08       /* lcd_data0.lcd_data0, OMAP_MUX_MODE0 | AM33XX_PIN_OUTPUT | AM33XX_PULL_DISA */
-                                0xa4 0x08       /* lcd_data1.lcd_data1, OMAP_MUX_MODE0 | AM33XX_PIN_OUTPUT | AM33XX_PULL_DISA */
-                                0xa8 0x08       /* lcd_data2.lcd_data2, OMAP_MUX_MODE0 | AM33XX_PIN_OUTPUT | AM33XX_PULL_DISA */
-                                0xac 0x08       /* lcd_data3.lcd_data3, OMAP_MUX_MODE0 | AM33XX_PIN_OUTPUT | AM33XX_PULL_DISA */
-                                0xb0 0x08       /* lcd_data4.lcd_data4, OMAP_MUX_MODE0 | AM33XX_PIN_OUTPUT | AM33XX_PULL_DISA */
-                                0xb4 0x08       /* lcd_data5.lcd_data5, OMAP_MUX_MODE0 | AM33XX_PIN_OUTPUT | AM33XX_PULL_DISA */
-                                0xb8 0x08       /* lcd_data6.lcd_data6, OMAP_MUX_MODE0 | AM33XX_PIN_OUTPUT | AM33XX_PULL_DISA */
-                                0xbc 0x08       /* lcd_data7.lcd_data7, OMAP_MUX_MODE0 | AM33XX_PIN_OUTPUT | AM33XX_PULL_DISA */
-                                0xc0 0x08       /* lcd_data8.lcd_data8, OMAP_MUX_MODE0 | AM33XX_PIN_OUTPUT | AM33XX_PULL_DISA */
-                                0xc4 0x08       /* lcd_data9.lcd_data9, OMAP_MUX_MODE0 | AM33XX_PIN_OUTPUT | AM33XX_PULL_DISA */
-                                0xc8 0x08       /* lcd_data10.lcd_data10, OMAP_MUX_MODE0 | AM33XX_PIN_OUTPUT | AM33XX_PULL_DISA */
-                                0xcc 0x08       /* lcd_data11.lcd_data11, OMAP_MUX_MODE0 | AM33XX_PIN_OUTPUT | AM33XX_PULL_DISA */
-                                0xd0 0x08       /* lcd_data12.lcd_data12, OMAP_MUX_MODE0 | AM33XX_PIN_OUTPUT | AM33XX_PULL_DISA */
-                                0xd4 0x08       /* lcd_data13.lcd_data13, OMAP_MUX_MODE0 | AM33XX_PIN_OUTPUT | AM33XX_PULL_DISA */
-                                0xd8 0x08       /* lcd_data14.lcd_data14, OMAP_MUX_MODE0 | AM33XX_PIN_OUTPUT | AM33XX_PULL_DISA */
-                                0xdc 0x08       /* lcd_data15.lcd_data15, OMAP_MUX_MODE0 | AM33XX_PIN_OUTPUT | AM33XX_PULL_DISA */
-                                0xe0 0x00       /* lcd_vsync.lcd_vsync, OMAP_MUX_MODE0 | AM33XX_PIN_OUTPUT */
-                                0xe4 0x00       /* lcd_hsync.lcd_hsync, OMAP_MUX_MODE0 | AM33XX_PIN_OUTPUT */
-                                0xe8 0x00       /* lcd_pclk.lcd_pclk, OMAP_MUX_MODE0 | AM33XX_PIN_OUTPUT */
-                                0xec 0x00       /* lcd_ac_bias_en.lcd_ac_bias_en, OMAP_MUX_MODE0 | AM33XX_PIN_OUTPUT */
-                                0x1a4 0x17      /* mcasp0_fsr.gpio3_19, OUTPUT | MODE7  LCD DISEN */
+                                0x0a0 0x08      /* lcd_data0.lcd_data0, OUTPUT_PULL_DISA | MODE0, LCD_D0 */
+                                0x0a4 0x08      /* lcd_data1.lcd_data1, OUTPUT_PULL_DISA | MODE0, LCD_D1 */
+                                0x0a8 0x08      /* lcd_data2.lcd_data2, OUTPUT_PULL_DISA | MODE0, LCD_D2 */
+                                0x0ac 0x08      /* lcd_data3.lcd_data3, OUTPUT_PULL_DISA | MODE0, LCD_D3 */
+                                0x0b0 0x08      /* lcd_data4.lcd_data4, OUTPUT_PULL_DISA | MODE0, LCD_D4 */
+                                0x0b4 0x08      /* lcd_data5.lcd_data5, OUTPUT_PULL_DISA | MODE0, LCD_D5 */
+                                0x0b8 0x08      /* lcd_data6.lcd_data6, OUTPUT_PULL_DISA | MODE0, LCD_D6 */
+                                0x0bc 0x08      /* lcd_data7.lcd_data7, OUTPUT_PULL_DISA | MODE0, LCD_D7 */
+                                0x0c0 0x08      /* lcd_data8.lcd_data8, OUTPUT_PULL_DISA | MODE0, LCD_D8 */
+                                0x0c4 0x08      /* lcd_data9.lcd_data9, OUTPUT_PULL_DISA | MODE0, LCD_D9 */
+                                0x0c8 0x08      /* lcd_data10.lcd_data10, OUTPUT_PULL_DISA | MODE0, LCD_D10 */
+                                0x0cc 0x08      /* lcd_data11.lcd_data11, OUTPUT_PULL_DISA | MODE0, LCD_D11 */
+                                0x0d0 0x08      /* lcd_data12.lcd_data12, OUTPUT_PULL_DISA | MODE0, LCD_D12 */
+                                0x0d4 0x08      /* lcd_data13.lcd_data13, OUTPUT_PULL_DISA | MODE0, LCD_D13 */
+                                0x0d8 0x08      /* lcd_data14.lcd_data14, OUTPUT_PULL_DISA | MODE0, LCD_D14 */
+                                0x0dc 0x08      /* lcd_data15.lcd_data15, OUTPUT_PULL_DISA | MODE0, LCD_D15 */
+                                0x0e0 0x00      /* lcd_vsync.lcd_vsync, OUTPUT_PULLDOWN | MODE0, LCD_VSYNC */
+                                0x0e4 0x00      /* lcd_hsync.lcd_hsync, OUTPUT_PULLDOWN | MODE0, LCD_HSYNC */
+                                0x0e8 0x00      /* lcd_pclk.lcd_pclk, OUTPUT_PULLDOWN | MODE0, LCD_PCLK */
+                                0x0ec 0x00      /* lcd_ac_bias_en.lcd_ac_bias_en, OUTPUT_PULLDOWN | MODE0, LCD_AC_BIAS_EN */
+                                0x1a4 0x17      /* mcasp0_fsr.gpio3_19, OUTPUT_PULLUP | MODE7, LCD_DISP */
                         >;
                 };
                 pwm_bl_pins: pinmux_pwm_bl_pins {
                         pinctrl-single,pins = <
-                                0x48 0x06       /* gpmc_a2.ehrpwm1a, OMAP_MUX_MODE6 | AM33XX_PIN_OUTPUT */
+                                0x048 0x06      /* gpmc_a2.ehrpwm1a, OUTPUT_PULLDOWN | MODE6, LCD_PWM_BL */
                         >;
                 };
-                touch_spi1_pins: pinmux_touch_spi1_pins {
+                spi0_pins: pinmux_spi0_pins {
+                        pinctrl-single,pins = <
+                                0x158 0x10      /* spi0_d1.spi0_d1, OUTPUT_PULLUP | MODE0, SPI0_D1 */
+                                0x154 0x30      /* spi0_d0.spi0_d0, INPUT_PULLUP | MODE0, SPI0_D0 */
+                                0x150 0x30      /* spi0_sclk.spi0_sclk, INPUT_PULLUP | MODE0, SPI0_CLK */
+                                0x15C 0x10      /* spi0_cs0.spi0_cs0, OUTPUT_PULLUP | MODE0, SPI0_CS0 */
+                                0x17C 0x17      /* uart1_rtsn.gpio0_13, OUTPUT_PULLUP | MODE7, SPI0_CS1 */
+                                0x178 0x17      /* uart1_ctsn.gpio0_12, OUTPUT_PULLUP | MODE7, SPI0_CS2 */
+                                0x044 0x17      /* gpmc_a1.gpio1_17, OUTPUT_PULLUP | MODE7, SPI0_CS3 */
+                                0x1AC 0x17      /* mcasp0_ahclkx.gpio3_21, OUTPUT_PULLUP | MODE7, SPI0_CS4 */
+                        >;
+                };
+                spi1_pins: pinmux_spi1_pins {
                         pinctrl-single,pins = <
                                 0x190 0x33      /* mcasp0_aclkx.spi1_sclk, INPUT_PULLUP | MODE3 */
                                 0x194 0x33      /* mcasp0_fsx.spi1_d0, INPUT_PULLUP | MODE3 */
-                                0x198 0x13      /* mcasp0_axr0.spi1_d1, OUTPUT_PULLUP | MODE3 */
                                 0x19c 0x13      /* mcasp0_ahclkr.spi1_cs0, OUTPUT_PULLUP | MODE3 */
+                        >;
+                };
+                onewire_0_pins: pinmux_onewire_0_pins {
+                        pinctrl-single,pins = <
+                                0x02C 0x37      /* gpmc_ad11.gpio0_27, INPUT_PULLUP | MODE7, 1wire_0 */
+                        >;
+                };
+                onewire_1_pins: pinmux_onewire_1_pins {
+                        pinctrl-single,pins = <
+                                0x198 0x37      /* mcasp0_axr0.gpio3_16, INPUT_PULLUP | MODE7, 1wire_1 */
                         >;
                 };
                 XPT2046_pins: pinmux_XPT2046_pins {
                         pinctrl-single,pins = <
-                                /* Pinmux comes from TRM section 9.3.1: CONTROL_MODULE Regusters. */
-                                /* so use GPIO1_29 (INT) */
-                                0x7c 0x2f /* gpmc_csn0.gpio1_29 input, no pull, mode 7 */
+                                0x07c 0x2F      /* gpmc_csn0.gpio1_29, INPUT_NOPULL | MODE7, SPI0_TS_IRQ */
+                                0x020 0x17      /* gpmc_ad8.gpio0_22, OUTPUT_PULLUP | MODE7, LCD_TS_BUSY */
                         >;
                 };
         };
@@ -140,10 +157,11 @@
                 uart1: serial@44e09000 {
                         status = "okay";
                 };
-                uart2: serial@48022000 {
-                        pinctrl-0 = <&uart2_pins>;
-                        pinctrl-names = "default";
-                        status = "okay";
+                rotary@0 {
+                        compatible = "rotary-encoder";
+                        gpios = <&gpio2 28 0>, <&gpio1 31 0>;
+                        linux,axis = <0>; /* REL_X */
+                        rotary-encoder,relative-axis;
                 };
                 gpio-leds {
                         compatible = "gpio-leds";
@@ -180,9 +198,78 @@
 
                         ledPWR {
                                 label = "beaglebone:blue:ledPWR";
-                                //gpios = <&gpio3 5 0>;
-                                gpios = <&gpio3 2 0>;
+                                gpios = <&gpio2 16 0>;
                                 default-state = "on";
+                        };
+                };
+
+                pwmleds {
+                        compatible = "pwm-leds";
+                        extruder {
+                                pwms = <&pca9685 2 5000000>;
+                                pwm-names = "extruder";
+                        };
+                        hotbed {
+                                pwms = <&pca9685 3 5000000>;
+                                pwm-names = "hotbed";
+                        };
+
+                        fan_0 {
+                                pwms = <&pca9685 0 5000000>;
+                                pwm-names = "fan_0";
+                        };
+                        fan_1 {
+                                pwms = <&pca9685 1 5000000>;
+                                pwm-names = "fan_1";
+                        };
+
+                        green_0 {
+                                pwms = <&pca9685 4 5000000>;
+                                pwm-names = "green_0";
+                        };
+                        red_0 {
+                                pwms = <&pca9685 5 5000000>;
+                                pwm-names = "red_0";
+                        };
+                        blue_0 {
+                                pwms = <&pca9685 6 5000000>;
+                                pwm-names = "blue_0";
+                        };
+                        green_1 {
+                                pwms = <&pca9685 7 5000000>;
+                                pwm-names = "green_1";
+                        };
+                        red_1 {
+                                pwms = <&pca9685 8 5000000>;
+                                pwm-names = "red_1";
+                        };
+                        blue_1 {
+                                pwms = <&pca9685 9 5000000>;
+                                pwm-names = "blue_1";
+                        };
+                        green_2 {
+                                pwms = <&pca9685 10 5000000>;
+                                pwm-names = "green_2";
+                        };
+                        red_2 {
+                                pwms = <&pca9685 11 5000000>;
+                                pwm-names = "red_2";
+                        };
+                        blue_2 {
+                                pwms = <&pca9685 12 5000000>;
+                                pwm-names = "blue_2";
+                        };
+                        green_3 {
+                                pwms = <&pca9685 13 5000000>;
+                                pwm-names = "green_3";
+                        };
+                        red_3 {
+                                pwms = <&pca9685 14 5000000>;
+                                pwm-names = "red_3";
+                        };
+                        blue_3 {
+                                pwms = <&pca9685 15 5000000>;
+                                pwm-names = "blue_3";
                         };
                 };
 
@@ -246,315 +333,19 @@
                         interrupts = <36>;
                         ti,hwmods = "lcdc";
                 };*/
-        };
 
-        bone_capemgr {
-                compatible = "ti,bone-capemgr";
-                status = "okay";
-
-                eeprom = <&baseboard_eeprom>;
-
-                baseboardmaps {
-                        baseboard_beaglebone: board@0 {
-                                board-name = "A335BONE";
-                                compatible-name = "ti,beaglebone";
-                        };
-
-                        baseboard_beaglebone_black: board@1 {
-                                board-name = "A335BNLT";
-                                compatible-name = "ti,beaglebone-black";
-                        };
+                onewire_0@0 {
+                        compatible = "w1-gpio";
+                        pinctrl-names = "default";
+                        pinctrl-0 = <&onewire_0_pins>;
+                        gpios = <&gpio1 27 0>;
                 };
 
-                slots {
-                        /*slot@0 {
-                                eeprom = <&cape_eeprom0>;
-                        };
-
-                        slot@1 {
-                                eeprom = <&cape_eeprom1>;
-                        };
-
-                        slot@2 {
-                                eeprom = <&cape_eeprom2>;
-                        };
-
-                        slot@3 {
-                                eeprom = <&cape_eeprom3>;
-                        };*/
-
-                        /* geiger cape version A0 without an EEPROM */
-                        slot@5 {
-                                ti,cape-override;
-                                compatible = "kernel-command-line", "runtime";
-                                board-name = "Bone-Geiger";
-                                version = "00A0";
-                                manufacturer = "Geiger Inc.";
-                                part-number = "BB-BONE-GEIGER";
-                        };
-
-                        /* Nixie cape version A0 without an EEPROM */
-                        slot@7 {
-                                ti,cape-override;
-                                compatible = "kernel-command-line", "runtime";
-                                board-name = "Bone-Nixie";
-                                version = "00A0";
-                                manufacturer = "Ranostay Industries";
-                                part-number = "BB-BONE-NIXIE";
-                        };
-
-                        /* adafruit 1.8" TFT prototype cape */
-                        slot@8 {
-                                ti,cape-override;
-                                compatible = "kernel-command-line", "runtime";
-                                board-name = "Bone-TFT";
-                                version = "00A0";
-                                manufacturer = "Adafruit";
-                                part-number = "BB-BONE-TFT-01";
-                        };
-
-                        /* adafruit RTC DS1307 prototype cape */
-                        slot@9 {
-                                ti,cape-override;
-                                compatible = "kernel-command-line", "runtime";
-                                board-name = "Bone-RTC";
-                                version = "00A0";
-                                manufacturer = "Adafruit";
-                                part-number = "BB-BONE-RTC-01";
-                        };
-
-                        slot@10 {
-                                ti,cape-override;
-                                compatible = "kernel-command-line", "runtime";
-                                board-name = "Bone-Hexy";
-                                version = "00A0";
-                                manufacturer = "Koen Kooi";
-                                part-number = "BB-BONE-HEXY-01";
-                        };
-                        /* MRF24J40 Cape Override */
-                        slot@11 {
-                                ti,cape-override;
-                                compatible = "kernel-command-line", "runtime";
-                                board-name = "Bone-MRF24J40";
-                                version = "00A0";
-                                manufacturer = "Signal 11 Software";
-                                part-number = "BB-BONE-MRF24J40";
-                        };
-
-                        /* RS232 cape */
-                        slot@12 {
-                                ti,cape-override;
-                                compatible = "kernel-command-line", "runtime";
-                                board-name = "BB-BONE-RS232";
-                                version = "00A0";
-                                manufacturer = "Adafruit";
-                                part-number = "BB-BONE-RS232-01";
-                        };
-
-                        /* GPS cape */
-                        slot@13 {
-                                compatible = "kernel-command-line", "runtime";
-                                board-name = "BB-BONE-GPS";
-                                version = "00A0";
-                                manufacturer = "Adafruit";
-                                part-number = "BB-BONE-GPS-01";
-                        };
-
-                        /* Beaglebone black has it soldered on */
-                         slot@100 {
-                                ti,cape-override;
-                                priority = <1>;
-                                compatible = "ti,beaglebone-black";
-                                board-name = "Bone-LT-eMMC-2G";
-                                version = "00A0";
-                                manufacturer = "Texas Instruments";
-                                part-number = "BB-BONE-EMMC-2G";
-                         };
-
-                        /* Beaglebone black has it soldered on */
-                        slot@101 {
-                                ti,cape-override;
-                                priority = <1>;
-                                compatible = "ti,beaglebone-black";
-                                board-name = "Bone-Black-HDMI";
-                                version = "00A0";
-                                manufacturer = "Texas Instruments";
-                                part-number = "BB-BONELT-HDMI";
-                        };
-
-                        /* Beaglebone black has it soldered on (but no audio) */
-                        slot@102 {
-                                ti,cape-override;
-                                priority = <2>;
-                                compatible = "ti,beaglebone-black";
-                                board-name = "Bone-Black-HDMIN";
-                                version = "00A0";
-                                manufacturer = "Texas Instruments";
-                                part-number = "BB-BONELT-HDMIN";
-                        };
-
-                };
-
-                /* mapping between board names and dtb objects */
-                capemaps {
-                        /* DVI cape */
-                        cape@0 {
-                                /* board-name = "BeagleBone DVI-D CAPE"; */
-                                part-number = "BB-BONE-DVID-01";
-                                version@00A0 {
-                                        version = "00A0";
-                                        dtbo = "cape-bone-dvi-00A0.dtbo";
-                                };
-                                version@00A1 {
-                                        version = "00A1", "01";
-                                        dtbo = "cape-bone-dvi-00A1.dtbo";
-                                };
-                                version@00A2 {
-                                        version = "00A2", "A2";
-                                        dtbo = "cape-bone-dvi-00A2.dtbo";
-                                };
-                                version@00A3 {
-                                        version = "00A3";
-                                        dtbo = "cape-bone-dvi-00A2.dtbo";
-                                };
-                        };
-
-                        /* beaglebone black emmc on board */
-                        cape@1 {
-                                /* board-name = "BeagleBone 2G eMMC1 CAPE"; */
-                                part-number = "BB-BONE-EMMC-2G";
-                                version@00A0 {
-                                        version = "00A0";
-                                        dtbo = "cape-bone-2g-emmc1.dtbo";
-                                };
-                        };
-
-                        /* geiger cape */
-                        cape@2 {
-                                part-number = "BB-BONE-GEIGER";
-                                version@00A0 {
-                                        version = "00A0";
-                                        dtbo = "cape-bone-geiger-00A0.dtbo";
-                                };
-                        };
-
-                        /* LCD3 cape */
-                        cape@3 {
-                                part-number = "BB-BONE-LCD3-01";
-                                version@00A0 {
-                                        version = "00A0";
-                                        dtbo = "cape-bone-lcd3-00A0.dtbo";
-                                };
-                                version@00A2 {
-                                        version = "00A2";
-                                        dtbo = "cape-bone-lcd3-00A2.dtbo";
-                                };
-                        };
-
-                        /* Weather cape */
-                        cape@4 {
-                                part-number = "BB-BONE-WTHR-01";
-                                version@00A0 {
-                                        version = "00A0";
-                                        dtbo = "cape-bone-weather-00A0.dtbo";
-                                };
-                                version@00B0 {
-                                        version = "00B0";
-                                        dtbo = "cape-bone-weather-00B0.dtbo";
-                                };
-                        };
-
-                        /* beaglebone black hdmi on board */
-                        cape@5 {
-                                part-number = "BB-BONELT-HDMI";
-                                version@00A0 {
-                                        version = "00A0";
-                                        dtbo = "cape-boneblack-hdmi-00A0.dtbo";
-                                };
-                        };
-
-                        /* nixie cape */
-                        cape@6 {
-                                part-number = "BB-BONE-NIXIE";
-                                version@00A0 {
-                                        version = "00A0";
-                                        dtbo = "cape-bone-nixie-00A0.dtbo";
-                                };
-                        };
-                        cape@7 {
-                                part-number = "BB-BONE-TFT-01";
-                                version@00A0 {
-                                        version = "00A0";
-                                        dtbo = "cape-bone-adafruit-lcd-00A0.dtbo";
-                                };
-                        };
-
-                        cape@8 {
-                                part-number = "BB-BONE-RTC-01";
-                                version@00A0 {
-                                        version = "00A0";
-                                        dtbo = "BB-BONE-RTC-00A0.dtbo";
-                                };
-                        };
-
-                        cape@9 {
-                                part-number = "BB-BONE-HEXY-01";
-                                version@00A0 {
-                                        version = "00A0";
-                                        dtbo = "cape-bone-hexy-00A0.dtbo";
-                                };
-                        };
-                        /* mrf24j40 cape */
-                        cape@10 {
-                                part-number = "BB-BONE-MRF24J40";
-                                version@00A0 {
-                                        version = "00A0";
-                                        dtbo = "cape-bone-mrf24j40-00A0.dtbo";
-                                };
-                        };
-                        /* expansion test */
-                        cape@11 {
-                                part-number = "BB-BONE-EXPTEST";
-                                version@00A0 {
-                                        version = "00A0";
-                                        dtbo = "cape-bone-exptest-00A0.dtbo";
-                                };
-                        };
-                        cape@12 {
-                                part-number = "BB-BONE-RS232-01";
-                                version@00A0 {
-                                        version = "00A0";
-                                        dtbo = "BB-BONE-RS232-00A0.dtbo";
-                                };
-                        };
-
-                        cape@13 {
-                                part-number = "BB-BONE-GPS-01";
-                                version@00A0 {
-                                        version = "00A0";
-                                        dtbo = "BB-BONE-GPS-00A0.dtbo";
-                                };
-                        };
-
-
-                        /* beaglebone black hdmi on board (No audio) */
-                        cape@14 {
-                                part-number = "BB-BONELT-HDMIN";
-                                version@00A0 {
-                                        version = "00A0";
-                                        dtbo = "cape-boneblack-hdmin-00A0.dtbo";
-                                };
-                        };
-
-                        /* remain backwards compatible with old EEPROM */
-                        cape@15 {
-                                part-number = "2191";
-                                version@R2 {
-                                        version = "R2";
-                                        dtbo = "cape-bebopr-R2.dtbo";
-                                };
-                        };
-
+                onewire_1@0 {
+                        compatible = "w1-gpio";
+                        pinctrl-names = "default";
+                        pinctrl-0 = <&onewire_1_pins>;
+                        gpios = <&gpio4 16 0>;
                 };
         };
 
@@ -574,15 +365,18 @@
         };
 };
 
-&spi1 {
+&spi0 {
         status = "okay";
         pinctrl-names = "default";
-        pinctrl-0 = <&touch_spi1_pins>;
+        pinctrl-0 = <&spi0_pins>;
+        //ti,spi-num-cs = <5>;
+        //num-cs = <5>;
+        //cs-gpios = <0>, <&gpio1 13 0>, <&gpio1 12 0>, <&gpio2 17 0>, <&gpio4 21 0>;
 
         ads7843@0 {
                 compatible = "ti,ads7846";
                 reg = <0>; /* CHIPSEL */
-                spi-max-frequency = <200000>;
+                spi-max-frequency = <100000>;
                 mode = <0>;
                 pinctrl-names = "default";
                 pinctrl-0 = <&XPT2046_pins>;
@@ -623,6 +417,20 @@
         baseboard_eeprom: baseboard_eeprom@50 {
                 compatible = "at,24c256";
                 reg = <0x50>;
+        };
+};
+
+&i2c1 {
+        status = "okay";
+        clock-frequency = <200000>;
+        pinctrl-names = "default";
+        pinctrl-0 = <&i2c1_pins>;
+
+        pca9685: pca9685@40 {
+                compatible = "nxp,pca9685-pwm";
+                #pwm-cells = <2>;
+                reg = <0x40>;
+                status = "okay";
         };
 };
 
@@ -725,21 +533,21 @@
 };
 
 &lcdc {
-	status = "okay";
+    status = "okay";
 
-	display-timings {
-		480x272p57 {
-			clock-frequency = <9000000>;
-			hactive = <480>;
-			vactive = <272>;
-			hfront-porch = <9>;
-			hback-porch = <44>;
-			hsync-len = <5>;
-			vback-porch = <13>;
-			vfront-porch = <4>;
-			vsync-len = <10>;
-			hsync-active = <0>;
-			vsync-active = <0>;
-		};
-	};
+    display-timings {
+        80x272p57 {
+            clock-frequency = <9000000>;
+            hactive = <480>;
+            vactive = <272>;
+            hfront-porch = <9>;
+            hback-porch = <44>;
+            hsync-len = <5>;
+            vback-porch = <13>;
+            vfront-porch = <4>;
+            vsync-len = <10>;
+            hsync-active = <0>;
+            vsync-active = <0>;
+        };
+    };
 };
